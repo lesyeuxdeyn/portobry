@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laurentius Bryan | Portfolio</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN - No Build Tool Required -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#0066CC',
+                            whatsapp: '#25D366',
+                            dark: '#0A0A0A',
+                            card: '#161618'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { -webkit-font-smoothing: antialiased; }
+        .hero-title { font-size: clamp(3.5rem, 10vw, 8rem); line-height: 0.85; }
+        
+        .project-card-glass {
+            backdrop-filter: blur(10px);
+        }
+        
+        .photo-frame {
+            border-radius: 3rem;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bg-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .experience-card:hover .timeline-dot {
+            transform: scale(1.5) translateX(-50%);
+            background-color: #0066CC;
+            box-shadow: 0 0 20px rgba(0,102,204,0.4);
+        }
+
+        .timeline-dot {
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-dot {
+                left: 0;
+                transform: none;
+            }
+            .experience-card:hover .timeline-dot {
+                transform: scale(1.5);
+            }
+        }
+    </style>
+</head>
+<body class="transition-colors duration-500 bg-white text-[#1D1D1F] dark:bg-brand-dark dark:text-gray-100 font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 transition-colors duration-500 bg-white/80 dark:bg-brand-dark/80">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <span class="font-black text-xl tracking-tighter uppercase italic">LB.</span>
+                <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                    <a href="#focus" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Focus</a>
+                    <a href="#projects" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Projects</a>
+                    <a href="#experience" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Experience</a>
+                    <a href="#contact" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Contact</a>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleDarkMode()" id="theme-toggle" class="p-2.5 rounded-full border border-gray-100 dark:border-gray-800 transition-all bg-gray-50 dark:bg-brand-card hover:scale-110">
+                    <i class="fa-solid fa-moon text-gray-500 dark:text-yellow-400" id="theme-icon"></i>
+                </button>
+                <a href="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/cv_laurentius.pdf" 
+                   target="_blank" 
+                   download="CV_Laurentius_Bryan.pdf" 
+                   class="bg-[#1D1D1F] dark:bg-blue-600 text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-all transform hover:scale-105 shadow-xl inline-block">
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+            <div class="bg-glow -top-24 -left-24 bg-blue-500/10 dark:bg-blue-500/15"></div>
+            <div class="bg-glow bottom-0 right-0 bg-blue-500/10 dark:bg-blue-500/10 opacity-50"></div>
+            
+            <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 items-center gap-16 py-12">
+                <div class="lg:col-span-8 z-10">
+                    <div class="mb-6 inline-flex items-center gap-3 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">Available for New Projects</span>
+                    </div>
+                    
+                    <h1 class="hero-title font-black tracking-tighter mb-8 italic">
+                        Laurentius <br />
+                        <span class="text-brand-blue dark:text-blue-500">Bryan.</span>
+                    </h1>
+                    
+                    <div class="max-w-2xl">
+                        <p class="text-2xl md:text-4xl font-bold mb-8 leading-tight tracking-tight">
+                            Informatics Engineer | <span class="opacity-50 font-light">AI Prompt Specialist</span>
+                        </p>
+                        <p class="text-lg md:text-xl leading-relaxed font-light mb-12 text-gray-500 dark:text-gray-400">
+                            Informatics Engineering professional with 2+ years of experience in data-driven automation within financial services. Currently advancing into <strong>AI Prompt Engineering</strong> to architect intelligent, automated solutions.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-6 items-center mb-12">
+                        <a href="#contact" class="group flex items-center space-x-4 bg-[#1D1D1F] dark:bg-white text-white dark:text-black px-8 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
+                            <span>Let's collaborate</span>
+                            <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 relative">
+                    <div class="photo-frame aspect-[4/5] w-full relative group border border-gray-100 dark:border-white/10 shadow-xl overflow-hidden">
+                         <img 
+                           src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/IMG_5817.JPG"
+                           alt="Laurentius Bryan"
+                           class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus Areas -->
+        <section id="focus" class="py-24 md:py-32 bg-[#F5F5F7] dark:bg-[#111111] transition-colors duration-500">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="h-px w-12 bg-brand-blue"></div>
+                        <h2 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-400 dark:text-gray-500">Strategic Roadmap</h2>
+                    </div>
+                    <h3 class="text-4xl md:text-5xl font-extrabold tracking-tight italic">Core Expertise</h3>
+                </div>
+                
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="group relative p-10 rounded-[2.5rem] transition-all duration-500 border border-white dark:border-gray-800 bg-white dark:bg-brand-card hover:-translate-y-2 overflow-hidden shadow-sm">
+                        <div class="mb-8 p-5 w-fit rounded-2xl shadow-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[5deg]">
+                            <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-4 tracking-tight group-hover:text-brand-blue transition-colors">AI Prompt Engineering</h4>
+                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed text-base font-light">Designing smart solutions through LLM optimization to enhance human-AI interaction and output quality.</p>
+                    </div>
+                    <div class="group relative p-10 rounded-[2.5rem] transition-all duration-500 border border-white dark:border-gray-800 bg-white dark:bg-brand-card hover:-translate-y-2 overflow-hidden shadow-sm">
+                        <div class="mb-8 p-5 w-fit rounded-2xl shadow-lg bg-gradient-to-br from-indigo-500 to-purple-600 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[5deg]">
+                            <i class="fa-solid fa-database text-2xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-4 tracking-tight group-hover:text-brand-blue transition-colors">Data Engineering</h4>
+                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed text-base font-light">Transforming complex datasets into actionable insights through advanced SQL and automated data pipelines.</p>
+                    </div>
+                    <div class="group relative p-10 rounded-[2.5rem] transition-all duration-500 border border-white dark:border-gray-800 bg-white dark:bg-brand-card hover:-translate-y-2 overflow-hidden shadow-sm">
+                        <div class="mb-8 p-5 w-fit rounded-2xl shadow-lg bg-gradient-to-br from-purple-500 to-pink-600 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[5deg]">
+                            <i class="fa-solid fa-brain text-2xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-4 tracking-tight group-hover:text-brand-blue transition-colors">AI Implementation</h4>
+                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed text-base font-light">Integrating intelligent AI workflows and automated business logic to drive operational excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 md:py-40">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-24">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+                        <h2 class="text-sm uppercase tracking-[0.3em] font-bold text-gray-400 dark:text-gray-500">Portfolio</h2>
+                    </div>
+                    <h3 class="text-4xl md:text-6xl font-black tracking-tighter italic">Featured Projects</h3>
+                </div>
+
+                <div class="space-y-32 md:space-y-48">
+                    <!-- Project 1 -->
+                    <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start group">
+                        <div class="w-full lg:w-[55%] lg:sticky lg:top-24">
+                            <div class="relative aspect-[16/10] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800">
+                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20170056.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                                <div class="absolute top-6 right-6 z-20">
+                                    <span class="px-5 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl">AI & Analytics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-[45%] flex flex-col pt-4">
+                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-8">Performance Analytics & Quality Guard</h4>
+                            <div class="space-y-8">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <div class="w-1.5 h-6 bg-red-500/50 rounded-full"></div>
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Context</p>
+                                    </div>
+                                    <p class="text-base md:text-lg leading-relaxed font-light text-gray-600 dark:text-gray-300">Lack of real-time visibility into daily worker activities and obstacles in monitoring objective pipeline movements.</p>
+                                </div>
+                                <div class="p-8 rounded-[2rem] project-card-glass border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-brand-card/70 shadow-sm transition-all group-hover:shadow-xl">
+                                    <p class="text-base leading-relaxed font-medium">Built an integrated monitoring tool that visualizes pipeline funnels and credit quality control using AI-based predictive analytics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 items-start group">
+                        <div class="w-full lg:w-[55%] lg:sticky lg:top-24">
+                            <div class="relative aspect-[16/10] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800">
+                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20173535.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                                <div class="absolute top-6 right-6 z-20">
+                                    <span class="px-5 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl">Automation</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-[45%] flex flex-col pt-4">
+                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-8">Automated Intelligence Pipeline</h4>
+                            <div class="space-y-8">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <div class="w-1.5 h-6 bg-red-500/50 rounded-full"></div>
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Context</p>
+                                    </div>
+                                    <p class="text-base md:text-lg leading-relaxed font-light text-gray-600 dark:text-gray-300">Manual reporting processes were time-consuming and prone to human error.</p>
+                                </div>
+                                <div class="p-8 rounded-[2rem] project-card-glass border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-brand-card/70 shadow-sm transition-all group-hover:shadow-xl">
+                                    <p class="text-base leading-relaxed font-medium">Developed an automated reporting ecosystem using AppSheet for intuitive mobile access and Google Apps Script for workflow automation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start group">
+                        <div class="w-full lg:w-[55%] lg:sticky lg:top-24">
+                            <div class="relative aspect-[16/10] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800">
+                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20162925.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                                <div class="absolute top-6 right-6 z-20">
+                                    <span class="px-5 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl">Computer Vision</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-[45%] flex flex-col pt-4">
+                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-8">AR Fabric Navigation System</h4>
+                            <div class="space-y-8">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <div class="w-1.5 h-6 bg-red-500/50 rounded-full"></div>
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Context</p>
+                                    </div>
+                                    <p class="text-base md:text-lg leading-relaxed font-light text-gray-600 dark:text-gray-300">Difficulty in searching for fabric stock in a vast warehouse using conventional systems.</p>
+                                </div>
+                                <div class="p-8 rounded-[2rem] project-card-glass border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-brand-card/70 shadow-sm transition-all group-hover:shadow-xl">
+                                    <p class="text-base leading-relaxed font-medium">Designed an Augmented Reality (AR) based navigation system using ARCore to visually guide users to the exact location of fabric storage.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 md:py-32 bg-[#F5F5F7] dark:bg-[#111111] transition-colors duration-500">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20 text-center">
+                    <h3 class="text-4xl md:text-5xl font-black tracking-tight italic">Work Experience</h3>
+                </div>
+
+                <div class="relative max-w-4xl mx-auto">
+                    <div class="absolute left-0 md:left-1/2 w-0.5 h-full bg-gray-200 dark:bg-gray-800"></div>
+
+                    <div class="space-y-12">
+                        <!-- Job 1 -->
+                        <div class="experience-card relative flex flex-col md:flex-row items-center group">
+                            <div class="hidden md:flex w-1/2 pr-12 justify-end text-right">
+                                <div>
+                                    <p class="text-sm font-black text-brand-blue mb-1 tracking-widest uppercase italic">2024 — 2026</p>
+                                    <span class="text-[10px] font-bold text-gray-400">Full-time</span>
+                                </div>
+                            </div>
+                            <div class="timeline-dot absolute w-5 h-5 rounded-full bg-white border-4 border-brand-blue z-10 dark:bg-brand-dark"></div>
+                            <div class="w-full md:w-1/2 pl-12">
+                                <div class="p-8 rounded-[2rem] border border-white dark:border-gray-800 bg-white dark:bg-brand-card shadow-sm transition-all group-hover:shadow-2xl">
+                                    <div class="md:hidden mb-2">
+                                        <p class="text-xs font-black text-brand-blue italic">2024 — 2026</p>
+                                    </div>
+                                    <h4 class="text-xl md:text-2xl font-black">IT Data Analyst & Visualization</h4>
+                                    <p class="text-sm font-bold text-gray-800 dark:text-gray-300">PT. Bank Rakyat Indonesia (Persero) Tbk.</p>
+                                    <p class="mt-4 text-gray-500 dark:text-gray-400 font-light leading-relaxed">Analyzing complex financial data and building interactive dashboards to support corporate strategic decision-making.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job 2 -->
+                        <div class="experience-card relative flex flex-col md:flex-row items-center group">
+                            <div class="w-full md:w-1/2 pr-0 md:pr-12 order-2 md:order-1 pl-12 md:pl-0">
+                                <div class="p-8 rounded-[2rem] border border-white dark:border-gray-800 bg-white dark:bg-brand-card shadow-sm transition-all group-hover:shadow-2xl md:text-right">
+                                    <div class="md:hidden mb-2">
+                                        <p class="text-xs font-black text-gray-400 italic">2023</p>
+                                    </div>
+                                    <h4 class="text-xl md:text-2xl font-black">IT Mobile Developer</h4>
+                                    <p class="text-sm font-bold text-gray-800 dark:text-gray-300">PT. Anggana Kurnia Putra</p>
+                                    <p class="mt-4 text-gray-500 dark:text-gray-400 font-light leading-relaxed">Developing advanced navigation systems using Augmented Reality technology, focusing on real-time spatial mapping.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-dot absolute w-5 h-5 rounded-full bg-white border-4 border-gray-300 z-10 dark:bg-brand-dark dark:border-gray-700"></div>
+                            <div class="hidden md:flex w-1/2 pl-12 order-2">
+                                <div>
+                                    <p class="text-sm font-black text-gray-400 mb-1 tracking-widest uppercase italic">2023</p>
+                                    <span class="text-[10px] font-bold text-gray-400">Internship</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 md:py-40 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-brand-card transition-colors duration-500">
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                <h2 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 italic">Let's Connect</h2>
+                <p class="text-lg md:text-xl mb-16 max-w-2xl mx-auto font-light leading-relaxed text-gray-500 dark:text-gray-400">
+                    Open for collaboration or just a casual discussion about data and AI. Reach out to me through the channels below.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laurentius.bryan.h@gmail.com" target="_blank" class="flex items-center gap-3 bg-brand-blue text-white px-10 py-6 rounded-3xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all shadow-2xl hover:-translate-y-2 w-full sm:w-auto justify-center">
+                        <i class="fa-solid fa-envelope text-lg"></i>
+                        <span>Email Me</span>
+                    </a>
+                    <a href="https://wa.link/v5nsai" target="_blank" class="flex items-center gap-3 bg-brand-whatsapp text-white px-10 py-6 rounded-3xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all shadow-2xl hover:-translate-y-2 w-full sm:w-auto justify-center">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Whatsapp Me</span>
+                    </a>
+                    <a href="https://linkedin.com/in/laurentius-bryan" target="_blank" class="flex items-center gap-3 border-2 border-gray-200 dark:border-gray-700 px-10 py-6 rounded-3xl font-black uppercase tracking-widest text-xs dark:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-all hover:-translate-y-2 w-full sm:w-auto justify-center">
+                        <i class="fa-brands fa-linkedin-in text-lg"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 text-center border-t border-gray-50 dark:border-gray-800 transition-colors duration-500">
+        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.4em]">
+            © <span id="year"></span> LAURENTIUS BRYAN HERMANTO • BANDUNG, INDONESIA
+        </p>
+    </footer>
+
+    <script>
+        // Update Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Dark Mode Logic
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.className = 'fa-solid fa-sun text-yellow-400';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.className = 'fa-solid fa-moon text-gray-500';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Persistent theme check
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            const toggleIcon = document.getElementById('theme-icon');
+            if (toggleIcon) toggleIcon.className = 'fa-solid fa-sun text-yellow-400';
+        }
+    </script>
+</body>
+</html>
