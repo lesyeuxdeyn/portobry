@@ -305,6 +305,11 @@
                                     <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">SQL</span>
                                     <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">System Architecture</span>
                                 </div>
+                                <!-- View Details Button -->
+                                <button onclick="openProjectModal('project-1')" class="mt-6 inline-flex items-center gap-2 bg-brand-blue/10 hover:bg-brand-blue/20 text-brand-blue border border-brand-blue/30 px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all transform hover:scale-105 w-fit">
+                                    <span>View Details</span>
+                                    <i class="fa-solid fa-circle-info text-xs"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -337,6 +342,11 @@
                                     <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">Python</span>
                                     <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">SQL Databases</span>
                                 </div>
+                                <!-- View Details Button -->
+                                <button onclick="openProjectModal('project-2')" class="mt-6 inline-flex items-center gap-2 bg-brand-blue/10 hover:bg-brand-blue/20 text-brand-blue border border-brand-blue/30 px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all transform hover:scale-105 w-fit">
+                                    <span>View Details</span>
+                                    <i class="fa-solid fa-circle-info text-xs"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -369,6 +379,11 @@
                                     <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">ARCore</span>
                                     <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">Mobile Dev</span>
                                 </div>
+                                <!-- View Details Button -->
+                                <button onclick="openProjectModal('project-3')" class="mt-6 inline-flex items-center gap-2 bg-brand-blue/10 hover:bg-brand-blue/20 text-brand-blue border border-brand-blue/30 px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all transform hover:scale-105 w-fit">
+                                    <span>View Details</span>
+                                    <i class="fa-solid fa-circle-info text-xs"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -512,6 +527,66 @@
         </section>
     </main>
 
+    <!-- Functional Case Study Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300 ease-out">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md" onclick="closeProjectModal()"></div>
+        
+        <!-- Modal Content Container -->
+        <div class="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto bg-[#020b18]/95 border border-white/10 p-6 md:p-10 rounded-[2.5rem] shadow-2xl glass-card text-left transition-transform duration-300 scale-95 flex flex-col gap-6">
+            <!-- Close icon -->
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-xl border border-white/10 hover:border-white/25 hover:bg-white/5 text-gray-400 hover:text-white transition-all z-20">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <!-- Category Banner -->
+            <div class="w-fit">
+                <span id="modal-category" class="px-4 py-1.5 rounded-full bg-blue-500/10 text-[10px] font-black uppercase tracking-widest text-brand-blue border border-blue-500/20"></span>
+            </div>
+
+            <!-- Title -->
+            <h3 id="modal-title" class="text-2xl md:text-4xl font-extrabold tracking-tight text-white leading-tight"></h3>
+            
+            <!-- Project Image Banner -->
+            <div class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 bg-white/5">
+                <img id="modal-image" src="" alt="Project screenshot" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Main Case Study Content -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+                <!-- Details Blocks -->
+                <div class="md:col-span-2 space-y-6">
+                    <div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-brand-blue mb-2">Overview</h4>
+                        <p id="modal-overview" class="text-sm md:text-base font-light text-gray-300 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-red-400 mb-2">The Challenge</h4>
+                        <p id="modal-challenge" class="text-sm md:text-base font-light text-gray-300 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-green-400 mb-2">The Approach & Solution</h4>
+                        <p id="modal-solution" class="text-sm md:text-base font-light text-gray-300 leading-relaxed"></p>
+                    </div>
+                </div>
+                
+                <!-- Side Panel (Metrics & Tools) -->
+                <div class="space-y-6 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+                    <div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-purple-400 mb-2">Business Impact</h4>
+                        <p id="modal-impact" class="text-sm md:text-base font-semibold text-gray-200 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-2">Key Competencies</h4>
+                        <div id="modal-tech" class="flex flex-wrap gap-2 pt-2">
+                            <!-- Populated dynamically via script -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Functional Toast Notification element -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out max-w-sm w-full bg-[#030e21]/90 border border-white/10 backdrop-blur-md p-4 rounded-2xl shadow-2xl flex items-center gap-4">
         <div id="toast-icon-bg" class="p-3 rounded-xl bg-blue-500/10 text-brand-blue">
@@ -560,6 +635,92 @@
         
         // Start tracking loop
         updateGlowPosition();
+
+        // Project Case Studies Data Library
+        const caseStudyData = {
+            'project-1': {
+                category: 'AI & Analytics',
+                title: 'Performance Analytics & Quality Guard',
+                image: 'https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20170056.png',
+                overview: 'A real-time operational auditing system integrated to track daily production funnels, audit performance output metrics, and evaluate critical pipeline queues.',
+                challenge: 'Management teams had low-frequency updates on structural workflow blockages. Delays inside active processing queues created severe operational bottlenecks and elevated background auditing risks.',
+                solution: 'Architected robust transaction analysis processors utilizing Java and fully-optimized SQL queries. Constructed smart prediction rules scanning current queues to automatically highlight delayed items before they trigger process SLA violations.',
+                impact: 'Boosted workflow auditing speed by 35% and dropped backlog queue waiting latency from days down to instant monitoring alerts.',
+                tech: ['Java', 'SQL', 'System Architecture', 'Predictive Analysis']
+            },
+            'project-2': {
+                category: 'Automation & BI',
+                title: 'Automated Intelligence Pipeline',
+                image: 'https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20173535.png',
+                overview: 'A serverless integration connecting mobile-based input platforms to unified backend data engines to construct instant Business Intelligence reporting structures.',
+                challenge: 'Operations relied deeply on manual, error-prone data entries from distributed offline sheets. This delayed core management reporting updates and offered no portable layout interfaces.',
+                solution: 'Constructed an intuitive mobile-friendly AppSheet layer mapping to data stores. Engineered secure Google Apps Script cron-jobs that compile fields automatically, syncing records smoothly to master relational engines.',
+                impact: 'Cut sheet entry and configuration discrepancies by 98%, saving over 12 operational hours per employee on a weekly basis.',
+                tech: ['AppSheet', 'Python', 'SQL Databases', 'Apps Script']
+            },
+            'project-3': {
+                category: 'Software Systems',
+                title: 'AR Fabric Navigation System',
+                image: 'https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20162925.png',
+                overview: 'An advanced visual localization Android application calculating the shortest paths in physically massive layouts through AR overlay directions.',
+                challenge: 'Sprawling storage zones filled with thousands of dynamic inventory rows. Staff wasted valuable hours manually tracking alphanumeric item coordinates across static sheets.',
+                solution: 'Developed an immersive mobile tracking platform with Android tools and Google ARCore. Designed an interactive 3D coordinate system anchor-pinning layout, drawing real-time navigation paths via spatial plane tracking.',
+                impact: 'Slashed static inventory search times from an average of 25 minutes down to under 4 minutes per target item.',
+                tech: ['Java / SDK', 'ARCore', 'Mobile Dev', 'Spatial Tracking']
+            }
+        };
+
+        const modalElement = document.getElementById('project-modal');
+        const modalContentBox = modalElement.querySelector('.glass-card');
+
+        function openProjectModal(projectId) {
+            const data = caseStudyData[projectId];
+            if (!data) return;
+
+            // Populate text elements
+            document.getElementById('modal-category').textContent = data.category;
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-image').src = data.image;
+            document.getElementById('modal-overview').textContent = data.overview;
+            document.getElementById('modal-challenge').textContent = data.challenge;
+            document.getElementById('modal-solution').textContent = data.solution;
+            document.getElementById('modal-impact').textContent = data.impact;
+
+            // Render tech badges
+            const techContainer = document.getElementById('modal-tech');
+            techContainer.innerHTML = '';
+            data.tech.forEach(techItem => {
+                const badge = document.createElement('span');
+                badge.className = 'px-3 py-1.5 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue';
+                badge.textContent = techItem;
+                techContainer.appendChild(badge);
+            });
+
+            // Prevent background page from scrolling
+            document.body.style.overflow = 'hidden';
+
+            // Trigger modal entry transitions
+            modalElement.classList.remove('opacity-0', 'pointer-events-none');
+            modalContentBox.classList.remove('scale-95');
+            modalContentBox.classList.add('scale-100');
+        }
+
+        function closeProjectModal() {
+            // Trigger modal exit transitions
+            modalElement.classList.add('opacity-0', 'pointer-events-none');
+            modalContentBox.classList.remove('scale-100');
+            modalContentBox.classList.add('scale-95');
+
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on Escape key press
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeProjectModal();
+            }
+        });
 
         // Contact Form Submission Handler
         const contactForm = document.getElementById('contact-form');
