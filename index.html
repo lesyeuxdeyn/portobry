@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laurentius Bryan | Portfolio</title>
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -25,268 +25,285 @@
                         brand: {
                             blue: '#0066CC',
                             whatsapp: '#25D366',
-                            dark: '#0A0A0A',
-                            card: '#161618'
+                            dark: '#020b18', /* Premium Deep Blue Base */
+                            cardDark: 'rgba(10, 25, 47, 0.45)', /* Translucent Dark Navy */
+                            cardLight: 'rgba(255, 255, 255, 0.45)'
                         }
                     }
                 }
             }
         }
     </script>
+    
     <style>
         html { scroll-behavior: smooth; }
-        body { -webkit-font-smoothing: antialiased; }
-        .hero-title { font-size: clamp(3.5rem, 10vw, 8rem); line-height: 0.85; }
-        
-        .project-card-glass {
-            backdrop-filter: blur(10px);
+        body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .hero-title { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 0.9; }
+
+        /* Premium Glassmorphic Styling */
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
         
-        .photo-frame {
-            border-radius: 3rem;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        .glass-card {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
         }
-        
-        .bg-glow {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            filter: blur(60px);
-            z-index: -1;
+
+        .glass-card:hover {
+            border-color: rgba(0, 102, 204, 0.35);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.1);
+        }
+
+        /* Black Grainy Noise Layer */
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.035;
+            mix-blend-mode: overlay;
             pointer-events: none;
         }
 
-        .experience-card:hover .timeline-dot {
-            transform: scale(1.5) translateX(-50%);
-            background-color: #0066CC;
-            box-shadow: 0 0 20px rgba(0,102,204,0.4);
+        /* Dynamic Cursor Following Radial Gradient */
+        #cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.18) 0%, rgba(138, 43, 226, 0.08) 50%, transparent 100%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            will-change: left, top;
         }
 
-        .timeline-dot {
-            left: 50%;
-            transform: translateX(-50%);
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .timeline-dot {
-                left: 0;
-                transform: none;
-            }
-            .experience-card:hover .timeline-dot {
-                transform: scale(1.5);
-            }
+        /* Static ambient glowing blobs for depth */
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0.25;
         }
     </style>
 </head>
-<body class="transition-colors duration-500 bg-white text-[#1D1D1F] dark:bg-brand-dark dark:text-gray-100 font-sans">
+<body class="bg-[#020b18] text-gray-100 font-sans relative">
 
-    <nav class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 transition-colors duration-500 bg-white/80 dark:bg-brand-dark/80">
+    <!-- Interactive Mouse-Following Glow element -->
+    <div id="cursor-glow"></div>
+
+    <!-- Grain Noise Overlay Layer -->
+    <div class="fixed inset-0 z-50 grain-overlay"></div>
+
+    <!-- Static Background Atmosphere -->
+    <div class="ambient-glow top-1/4 left-10 w-[450px] h-[450px] bg-blue-700/25"></div>
+    <div class="ambient-glow bottom-1/4 right-10 w-[550px] h-[550px] bg-indigo-900/20"></div>
+
+    <!-- Navigasi -->
+    <nav class="fixed top-0 w-full z-40 glass-nav bg-brand-dark/30">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-8">
                 <span class="font-black text-xl tracking-tighter uppercase italic">LB.</span>
                 <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest">
-                    <a href="#focus" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Focus</a>
-                    <a href="#skills" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Skills</a>
-                    <a href="#projects" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Projects</a>
-                    <a href="#experience" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Experience</a>
-                    <a href="#contact" class="text-gray-500 dark:text-gray-400 hover:text-brand-blue transition-colors">Contact</a>
+                    <a href="#focus" class="text-gray-400 hover:text-brand-blue transition-colors">Focus</a>
+                    <a href="#skills" class="text-gray-400 hover:text-brand-blue transition-colors">Skills</a>
+                    <a href="#projects" class="text-gray-400 hover:text-brand-blue transition-colors">Projects</a>
+                    <a href="#experience" class="text-gray-400 hover:text-brand-blue transition-colors">Experience</a>
+                    <a href="#contact" class="text-gray-400 hover:text-brand-blue transition-colors">Contact</a>
                 </div>
             </div>
             
             <div class="flex items-center gap-4">
-                <button onclick="toggleDarkMode()" id="theme-toggle" class="p-2.5 rounded-full border border-gray-100 dark:border-gray-800 transition-all bg-gray-50 dark:bg-brand-card hover:scale-110">
-                    <i class="fa-solid fa-moon text-gray-500 dark:text-yellow-400" id="theme-icon"></i>
-                </button>
+                <!-- Tombol Unduh CV -->
                 <a href="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/cv_laurentius.pdf" 
                    target="_blank" 
                    download="CV_Laurentius_Bryan.pdf" 
-                   class="bg-[#1D1D1F] dark:bg-blue-600 text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-all transform hover:scale-105 shadow-xl inline-block">
+                   class="bg-brand-blue text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-all transform hover:scale-105 shadow-lg inline-block">
                     Download CV
                 </a>
             </div>
         </div>
     </nav>
 
-    <main>
-        <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
-            <div class="bg-glow -top-24 -left-24 bg-blue-500/10 dark:bg-blue-500/15"></div>
-            <div class="bg-glow bottom-0 right-0 bg-blue-500/10 dark:bg-blue-500/10 opacity-50"></div>
-            
-            <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 items-center gap-16 py-12">
-                <div class="lg:col-span-8 z-10">
-                    <div class="mb-6 inline-flex items-center gap-3 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 items-center gap-16">
+                <!-- Deskripsi Utama -->
+                <div class="lg:col-span-7 flex flex-col justify-center">
+                    <div class="mb-6 inline-flex items-center gap-3 px-4 py-1.5 bg-blue-500/10 rounded-full border border-blue-500/20 w-fit">
                         <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">Available for New Projects</span>
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">Interactive Portfolio</span>
                     </div>
                     
-                    <h1 class="hero-title font-black tracking-tighter mb-8 italic">
+                    <h1 class="hero-title font-black tracking-tighter mb-6 italic text-white">
                         Laurentius <br />
-                        <span class="text-brand-blue dark:text-blue-500">Bryan.</span>
+                        <span class="text-brand-blue">Bryan.</span>
                     </h1>
                     
                     <div class="max-w-2xl">
-                        <p class="text-2xl md:text-4xl font-bold mb-8 leading-tight tracking-tight">
-                            Informatics Engineer | <span class="opacity-50 font-light">AI & Data Solutions Specialist</span>
+                        <p class="text-2xl md:text-3xl font-bold mb-6 leading-tight tracking-tight text-gray-200">
+                            Software Engineer | <span class="opacity-50 font-light">Data Analyst Specialist</span>
                         </p>
-                        <p class="text-lg md:text-xl leading-relaxed font-light mb-12 text-gray-500 dark:text-gray-400">
-                            Informatics Engineering professional with 2+ years of experience in data analytics, business intelligence, automation, and digital solutions development.
+                        <p class="text-md md:text-lg leading-relaxed font-light mb-10 text-gray-400">
+                            Informatics Engineering professional with 2+ years of experience specializing in constructing robust software systems and data-driven optimization within financial services. Expert in clean architecture and pipeline automation.
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap gap-6 items-center mb-12">
-                        <a href="#contact" class="group flex items-center space-x-4 bg-[#1D1D1F] dark:bg-white text-white dark:text-black px-8 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <a href="#contact" class="group flex items-center space-x-4 bg-brand-blue text-white px-8 py-4.5 rounded-2xl font-bold hover:scale-105 transition-all shadow-xl">
                             <span>Let's collaborate</span>
                             <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
-                <div class="lg:col-span-4 relative">
-                    <div class="photo-frame aspect-[4/5] w-full relative group border border-gray-100 dark:border-white/10 shadow-xl overflow-hidden">
-                         <img 
-                           src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/IMG_5817.JPG"
-                           alt="Laurentius Bryan"
-                           class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
-                        />
+                <!-- Clean, Static, Professional Profile Frame (No Hover Scaling/Animations/3D Tilting) -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-full max-w-[340px] aspect-[4/5] rounded-[3rem] p-2 bg-white/5 border border-white/10 shadow-2xl overflow-hidden">
+                        <div class="w-full h-full rounded-[2.5rem] overflow-hidden">
+                             <img 
+                               src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/IMG_5817.JPG"
+                               alt="Laurentius Bryan Portrait"
+                               class="w-full h-full object-cover"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="focus" class="py-24 md:py-32 bg-[#F5F5F7] dark:bg-[#111111] transition-colors duration-500">
+        <!-- Focus Areas Section -->
+        <section id="focus" class="py-24 md:py-32">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="mb-20">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="h-px w-12 bg-brand-blue"></div>
-                        <h2 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-400 dark:text-gray-500">Strategic Roadmap</h2>
+                        <h2 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-500">Core Expertise</h2>
                     </div>
-                    <h3 class="text-4xl md:text-5xl font-extrabold tracking-tight italic">Core Expertise</h3>
+                    <h3 class="text-4xl md:text-5xl font-extrabold tracking-tight italic text-white">Strategic Roadmap</h3>
                 </div>
                 
                 <div class="grid lg:grid-cols-3 gap-8">
-                    <!-- Focus 1 -->
-                    <div class="group relative p-10 rounded-[2.5rem] transition-all duration-500 border border-white dark:border-gray-800 bg-white dark:bg-brand-card hover:-translate-y-2 overflow-hidden shadow-sm">
+                    <!-- Area 1 (Software Engineering) -->
+                    <div class="group relative p-10 rounded-[2.5rem] bg-brand-cardDark glass-card">
                         <div class="mb-8 p-5 w-fit rounded-2xl shadow-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[5deg]">
-                            <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+                            <i class="fa-solid fa-code text-2xl"></i>
                         </div>
-                        <h4 class="text-2xl font-bold mb-4 tracking-tight group-hover:text-brand-blue transition-colors">AI Prompt Engineering</h4>
-                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed text-base font-light">Designing smart solutions through LLM optimization to enhance human-AI interaction and output quality.</p>
+                        <h4 class="text-2xl font-bold mb-4 tracking-tight text-white group-hover:text-brand-blue transition-colors">Software Engineering</h4>
+                        <p class="text-gray-400 leading-relaxed text-sm font-light">Architecting scalable, responsive, and performance-optimized systems using clean code and agile development methodologies.</p>
                     </div>
-                    <!-- Focus 2 -->
-                    <div class="group relative p-10 rounded-[2.5rem] transition-all duration-500 border border-white dark:border-gray-800 bg-white dark:bg-brand-card hover:-translate-y-2 overflow-hidden shadow-sm">
+                    <!-- Area 2 (Workflow Automation) -->
+                    <div class="group relative p-10 rounded-[2.5rem] bg-brand-cardDark glass-card">
+                        <div class="mb-8 p-5 w-fit rounded-2xl shadow-lg bg-gradient-to-br from-purple-500 to-indigo-600 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[5deg]">
+                            <i class="fa-solid fa-robot text-2xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-4 tracking-tight text-white group-hover:text-brand-blue transition-colors">Workflow Automation</h4>
+                        <p class="text-gray-400 leading-relaxed text-sm font-light">Streamlining operational bottlenecks by building lightweight microservices, integration hooks, and scripting pipelines.</p>
+                    </div>
+                    <!-- Area 3 (Data Analysis) -->
+                    <div class="group relative p-10 rounded-[2.5rem] bg-brand-cardDark glass-card">
                         <div class="mb-8 p-5 w-fit rounded-2xl shadow-lg bg-gradient-to-br from-indigo-500 to-purple-600 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[5deg]">
-                            <i class="fa-solid fa-database text-2xl"></i>
+                            <i class="fa-solid fa-chart-column text-2xl"></i>
                         </div>
-                        <h4 class="text-2xl font-bold mb-4 tracking-tight group-hover:text-brand-blue transition-colors">Data Engineering</h4>
-                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed text-base font-light">Transforming complex datasets into actionable insights through advanced SQL and automated data pipelines.</p>
-                    </div>
-                    <!-- Focus 3 -->
-                    <div class="group relative p-10 rounded-[2.5rem] transition-all duration-500 border border-white dark:border-gray-800 bg-white dark:bg-brand-card hover:-translate-y-2 overflow-hidden shadow-sm">
-                        <div class="mb-8 p-5 w-fit rounded-2xl shadow-lg bg-gradient-to-br from-purple-500 to-pink-600 text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[5deg]">
-                            <i class="fa-solid fa-brain text-2xl"></i>
-                        </div>
-                        <h4 class="text-2xl font-bold mb-4 tracking-tight group-hover:text-brand-blue transition-colors">AI Implementation</h4>
-                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed text-base font-light">Integrating intelligent AI workflows and automated business logic to drive operational excellence.</p>
+                        <h4 class="text-2xl font-bold mb-4 tracking-tight text-white group-hover:text-brand-blue transition-colors">Data Analysis</h4>
+                        <p class="text-gray-400 leading-relaxed text-sm font-light">Formulating relational database logic, modeling complex pipelines, and visualizing core metrics to guide corporate decisions.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-24 bg-white dark:bg-brand-dark transition-colors duration-500">
+        <!-- Technical Skills Section -->
+        <section id="skills" class="py-24">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="mb-20">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="h-px w-12 bg-brand-blue"></div>
-                        <h2 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-400 dark:text-gray-500">Technical Abilities</h2>
+                        <h2 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-500">Technical Abilities</h2>
                     </div>
-                    <h3 class="text-4xl md:text-5xl font-extrabold tracking-tight italic">Skills & Tools</h3>
+                    <h3 class="text-4xl md:text-5xl font-extrabold tracking-tight italic text-white">Skills & Tools</h3>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Category 1 -->
-                    <div class="p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 bg-[#F5F5F7] dark:bg-brand-card transition-all hover:scale-105">
-                        <h4 class="text-xs font-black uppercase tracking-widest text-brand-blue mb-6">AI & Automation</h4>
-                        <ul class="space-y-3 font-light text-gray-600 dark:text-gray-400">
-                            <li><i class="fa-solid fa-check text-xs text-brand-blue mr-2"></i>Prompt Engineering</li>
-                            <li><i class="fa-solid fa-check text-xs text-brand-blue mr-2"></i>LLM Orchestration</li>
-                            <li><i class="fa-solid fa-check text-xs text-brand-blue mr-2"></i>Workflow Automation</li>
-                            <li><i class="fa-solid fa-check text-xs text-brand-blue mr-2"></i>Google Apps Script</li>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Kategori 1: Software Development -->
+                    <div class="p-8 rounded-[2rem] bg-brand-cardDark glass-card">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-brand-blue mb-6">Software Development</h4>
+                        <ul class="space-y-4 font-light text-gray-300">
+                            <li class="flex items-center"><i class="fa-solid fa-circle-nodes text-xs text-brand-blue mr-3"></i>OOP & SOLID Patterns</li>
+                            <li class="flex items-center"><i class="fa-solid fa-atom text-xs text-brand-blue mr-3"></i>React & Node.js Frameworks</li>
+                            <li class="flex items-center"><i class="fa-solid fa-wind text-xs text-brand-blue mr-3"></i>Tailwind Utility Engine</li>
+                            <li class="flex items-center"><i class="fa-solid fa-server text-xs text-brand-blue mr-3"></i>REST APIs & Microservices</li>
+                            <li class="flex items-center"><i class="fa-solid fa-code-branch text-xs text-brand-blue mr-3"></i>Git Version Control</li>
                         </ul>
                     </div>
-                    <!-- Category 2 -->
-                    <div class="p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 bg-[#F5F5F7] dark:bg-brand-card transition-all hover:scale-105">
-                        <h4 class="text-xs font-black uppercase tracking-widest text-indigo-500 mb-6">Data Engineering</h4>
-                        <ul class="space-y-3 font-light text-gray-600 dark:text-gray-400">
-                            <li><i class="fa-solid fa-check text-xs text-indigo-500 mr-2"></i>Advanced SQL</li>
-                            <li><i class="fa-solid fa-check text-xs text-indigo-500 mr-2"></i>ETL/ELT Pipelines</li>
-                            <li><i class="fa-solid fa-check text-xs text-indigo-500 mr-2"></i>Data Visualization</li>
-                            <li><i class="fa-solid fa-check text-xs text-indigo-500 mr-2"></i>Python Analysis</li>
+                    <!-- Kategori 2: Data & Database -->
+                    <div class="p-8 rounded-[2rem] bg-brand-cardDark glass-card">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-indigo-400 mb-6">Data & Databases</h4>
+                        <ul class="space-y-4 font-light text-gray-300">
+                            <li class="flex items-center"><i class="fa-solid fa-database text-xs text-indigo-400 mr-3"></i>Relational Databases (SQL)</li>
+                            <li class="flex items-center"><i class="fa-solid fa-shuffle text-xs text-indigo-400 mr-3"></i>ETL Pipeline Engineering</li>
+                            <li class="flex items-center"><i class="fa-solid fa-chart-line text-xs text-indigo-400 mr-3"></i>Data Visualization</li>
+                            <li class="flex items-center"><i class="fa-solid fa-bolt text-xs text-indigo-400 mr-3"></i>Query Optimization</li>
                         </ul>
                     </div>
-                    <!-- Category 3 -->
-                    <div class="p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 bg-[#F5F5F7] dark:bg-brand-card transition-all hover:scale-105">
-                        <h4 class="text-xs font-black uppercase tracking-widest text-purple-500 mb-6">Mobile & AR</h4>
-                        <ul class="space-y-3 font-light text-gray-600 dark:text-gray-400">
-                            <li><i class="fa-solid fa-check text-xs text-purple-500 mr-2"></i>ARCore Development</li>
-                            <li><i class="fa-solid fa-check text-xs text-purple-500 mr-2"></i>AppSheet Solutions</li>
-                            <li><i class="fa-solid fa-check text-xs text-purple-500 mr-2"></i>Computer Vision</li>
-                            <li><i class="fa-solid fa-check text-xs text-purple-500 mr-2"></i>Spatial Mapping</li>
-                        </ul>
-                    </div>
-                    <!-- Category 4 -->
-                    <div class="p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 bg-[#F5F5F7] dark:bg-brand-card transition-all hover:scale-105">
-                        <h4 class="text-xs font-black uppercase tracking-widest text-pink-500 mb-6">Core Languages</h4>
-                        <ul class="space-y-3 font-light text-gray-600 dark:text-gray-400">
-                            <li><i class="fa-solid fa-check text-xs text-pink-500 mr-2"></i>Python</li>
-                            <li><i class="fa-solid fa-check text-xs text-pink-500 mr-2"></i>Java</li>
-                            <li><i class="fa-solid fa-check text-xs text-pink-500 mr-2"></i>SQL (MySQL, Postgres)</li>
-                            <li><i class="fa-solid fa-check text-xs text-pink-500 mr-2"></i>HTML / CSS / JS</li>
+                    <!-- Kategori 3: App Systems & Mobile -->
+                    <div class="p-8 rounded-[2rem] bg-brand-cardDark glass-card">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-purple-400 mb-6">App Systems & Mobile</h4>
+                        <ul class="space-y-4 font-light text-gray-300">
+                            <li class="flex items-center"><i class="fa-solid fa-mobile text-xs text-purple-400 mr-3"></i>Mobile App Architecture</li>
+                            <li class="flex items-center"><i class="fa-solid fa-shapes text-xs text-purple-400 mr-3"></i>ARCore Implementation</li>
+                            <li class="flex items-center"><i class="fa-solid fa-grid-2 text-xs text-purple-400 mr-3"></i>AppSheet Solutions</li>
+                            <li class="flex items-center"><i class="fa-solid fa-microchip text-xs text-purple-400 mr-3"></i>Android SDK</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="py-24 md:py-40 bg-[#F5F5F7] dark:bg-[#111111] transition-colors duration-500">
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 md:py-32">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="mb-24">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
-                        <h2 class="text-sm uppercase tracking-[0.3em] font-bold text-gray-400 dark:text-gray-500">Portfolio</h2>
+                        <h2 class="text-sm uppercase tracking-[0.3em] font-bold text-gray-500">Portfolio</h2>
                     </div>
-                    <h3 class="text-4xl md:text-6xl font-black tracking-tighter italic">Featured Projects</h3>
+                    <h3 class="text-4xl md:text-6xl font-black tracking-tighter italic text-white">Featured Projects</h3>
                 </div>
 
                 <div class="space-y-32 md:space-y-48">
                     <!-- Project 1 -->
                     <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start group">
                         <div class="w-full lg:w-[55%] lg:sticky lg:top-24">
-                            <div class="relative aspect-[16/10] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-white">
-                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20170056.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                            <div class="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 bg-white/5 glass-card">
+                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20170056.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Performance Analytics screenshot">
                                 <div class="absolute top-6 right-6 z-20">
-                                    <span class="px-5 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl">AI & Analytics</span>
+                                    <span class="px-5 py-2 rounded-full bg-black/80 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl border border-white/10">AI & Analytics</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full lg:w-[45%] flex flex-col pt-4">
-                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-6">Performance Analytics & Quality Guard</h4>
+                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-6 text-white">Performance Analytics & Quality Guard</h4>
                             <div class="space-y-8">
                                 <div>
                                     <div class="flex items-center gap-3 mb-3">
                                         <div class="w-1.5 h-6 bg-red-500/50 rounded-full"></div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Context</p>
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Context</p>
                                     </div>
-                                    <p class="text-base md:text-lg leading-relaxed font-light text-gray-600 dark:text-gray-300">Lack of real-time visibility into daily worker activities and obstacles in monitoring objective pipeline movements.</p>
+                                    <p class="text-base leading-relaxed font-light text-gray-400">Lack of real-time visibility into daily worker activities and obstacles in monitoring objective pipeline movements.</p>
                                 </div>
-                                <div class="p-8 rounded-[2rem] project-card-glass border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-brand-card/70 shadow-sm transition-all group-hover:shadow-xl">
-                                    <p class="text-base leading-relaxed font-medium">Built an integrated monitoring tool that visualizes pipeline funnels and credit quality control using AI-based predictive analytics.</p>
+                                <div class="p-8 rounded-[2rem] bg-white/5 border border-white/10 shadow-sm transition-all group-hover:shadow-xl glass-card">
+                                    <p class="text-base leading-relaxed font-medium text-gray-200">Built an integrated monitoring tool that visualizes pipeline funnels and credit quality control using AI-based predictive analytics.</p>
                                 </div>
                                 <div class="flex flex-wrap gap-2 pt-4">
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">React.js</span>
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">Python</span>
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">Prompt Engineering</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">Java</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">SQL</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">System Architecture</span>
                                 </div>
                             </div>
                         </div>
@@ -295,31 +312,30 @@
                     <!-- Project 2 -->
                     <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 items-start group">
                         <div class="w-full lg:w-[55%] lg:sticky lg:top-24">
-                            <div class="relative aspect-[16/10] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-white">
-                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20173535.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                            <div class="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 bg-white/5 glass-card">
+                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20173535.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Automated Intelligence Pipeline screenshot">
                                 <div class="absolute top-6 right-6 z-20">
-                                    <span class="px-5 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl">Automation</span>
+                                    <span class="px-5 py-2 rounded-full bg-black/80 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl border border-white/10">Automation & BI</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full lg:w-[45%] flex flex-col pt-4">
-                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-6">Automated Intelligence Pipeline</h4>
+                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-6 text-white">Automated Intelligence Pipeline</h4>
                             <div class="space-y-8">
                                 <div>
                                     <div class="flex items-center gap-3 mb-3">
                                         <div class="w-1.5 h-6 bg-red-500/50 rounded-full"></div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Context</p>
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Context</p>
                                     </div>
-                                    <p class="text-base md:text-lg leading-relaxed font-light text-gray-600 dark:text-gray-300">Manual reporting processes were time-consuming and prone to human error.</p>
+                                    <p class="text-base leading-relaxed font-light text-gray-400">Manual reporting processes were time-consuming and prone to human error.</p>
                                 </div>
-                                <div class="p-8 rounded-[2rem] project-card-glass border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-brand-card/70 shadow-sm transition-all group-hover:shadow-xl">
-                                    <p class="text-base leading-relaxed font-medium">Developed an automated reporting ecosystem using AppSheet for intuitive mobile access and Google Apps Script for workflow automation.</p>
+                                <div class="p-8 rounded-[2rem] bg-white/5 border border-white/10 shadow-sm transition-all group-hover:shadow-xl glass-card">
+                                    <p class="text-base leading-relaxed font-medium text-gray-200">Developed an automated reporting ecosystem using AppSheet for intuitive mobile access and Google Apps Script for workflow automation.</p>
                                 </div>
                                 <div class="flex flex-wrap gap-2 pt-4">
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">AppSheet</span>
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">Apps Script</span>
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">Python</span>
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">SQL</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">AppSheet</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">Python</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">SQL Databases</span>
                                 </div>
                             </div>
                         </div>
@@ -328,30 +344,30 @@
                     <!-- Project 3 -->
                     <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start group">
                         <div class="w-full lg:w-[55%] lg:sticky lg:top-24">
-                            <div class="relative aspect-[16/10] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-white">
-                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20162925.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                            <div class="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 bg-white/5 glass-card">
+                                <img src="https://raw.githubusercontent.com/lesyeuxdeyn/portobry/main/Screenshot%202026-04-17%20162925.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="AR Navigation screenshot">
                                 <div class="absolute top-6 right-6 z-20">
-                                    <span class="px-5 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl">Computer Vision</span>
+                                    <span class="px-5 py-2 rounded-full bg-black/80 backdrop-blur-md text-[10px] font-black uppercase tracking-widest shadow-xl border border-white/10">Software Systems</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full lg:w-[45%] flex flex-col pt-4">
-                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-6">AR Fabric Navigation System</h4>
+                            <h4 class="text-3xl md:text-4xl font-extrabold group-hover:text-brand-blue transition-colors mb-6 text-white">AR Fabric Navigation System</h4>
                             <div class="space-y-8">
                                 <div>
                                     <div class="flex items-center gap-3 mb-3">
                                         <div class="w-1.5 h-6 bg-red-500/50 rounded-full"></div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Context</p>
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Context</p>
                                     </div>
-                                    <p class="text-base md:text-lg leading-relaxed font-light text-gray-600 dark:text-gray-300">Difficulty in searching for fabric stock in a vast warehouse using conventional systems.</p>
+                                    <p class="text-base leading-relaxed font-light text-gray-400">Difficulty in searching for fabric stock in a vast warehouse using conventional systems.</p>
                                 </div>
-                                <div class="p-8 rounded-[2rem] project-card-glass border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-brand-card/70 shadow-sm transition-all group-hover:shadow-xl">
-                                    <p class="text-base leading-relaxed font-medium">Designed an Augmented Reality (AR) based navigation system using ARCore to visually guide users to the exact location of fabric storage.</p>
+                                <div class="p-8 rounded-[2rem] bg-white/5 border border-white/10 shadow-sm transition-all group-hover:shadow-xl glass-card">
+                                    <p class="text-base leading-relaxed font-medium text-gray-200">Designed an Augmented Reality (AR) based navigation system using ARCore to visually guide users to the exact location of fabric storage.</p>
                                 </div>
                                 <div class="flex flex-wrap gap-2 pt-4">
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">Java</span>
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">ARCore</span>
-                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/30 bg-white dark:bg-brand-card text-brand-blue">Computer Vision</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">Java / SDK</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">ARCore</span>
+                                    <span class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 bg-brand-cardDark text-brand-blue">Mobile Dev</span>
                                 </div>
                             </div>
                         </div>
@@ -360,14 +376,16 @@
             </div>
         </section>
 
-        <section id="experience" class="py-24 md:py-32 bg-white dark:bg-brand-dark transition-colors duration-500">
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 md:py-32">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="mb-20 text-center">
-                    <h3 class="text-4xl md:text-5xl font-black tracking-tight italic">Work Experience</h3>
+                    <h3 class="text-4xl md:text-5xl font-black tracking-tight italic text-white">Work Experience</h3>
                 </div>
 
                 <div class="relative max-w-4xl mx-auto">
-                    <div class="absolute left-0 md:left-1/2 w-0.5 h-full bg-gray-200 dark:bg-gray-800"></div>
+                    <!-- Timeline center line -->
+                    <div class="absolute left-0 md:left-1/2 w-0.5 h-full bg-white/10 transform -translate-x-1/2"></div>
 
                     <div class="space-y-12">
                         <!-- Job 1 -->
@@ -378,23 +396,23 @@
                                     <span class="text-[10px] font-bold text-gray-400">Full-time</span>
                                 </div>
                             </div>
-                            <div class="timeline-dot absolute w-5 h-5 rounded-full bg-white border-4 border-brand-blue z-10 dark:bg-brand-dark"></div>
+                            <!-- Timeline Dot center alignment -->
+                            <div class="timeline-dot absolute left-[1px] md:left-1/2 w-5 h-5 rounded-full bg-[#020b18] border-4 border-brand-blue z-10"></div>
                             <div class="w-full md:w-1/2 pl-12">
-                                <div class="p-8 rounded-[2rem] border border-white dark:border-gray-800 bg-white dark:bg-brand-card shadow-sm transition-all group-hover:shadow-2xl">
+                                <div class="p-8 rounded-[2.5rem] bg-brand-cardDark shadow-sm border border-white/5 transition-all group-hover:shadow-2xl glass-card">
                                     <div class="md:hidden mb-4">
                                         <p class="text-xs font-black text-brand-blue italic">2024 — 2026</p>
                                     </div>
-                                    <!-- Role Icon Row -->
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="p-4 rounded-2xl bg-blue-500/10 text-brand-blue dark:bg-blue-500/20 dark:text-blue-400">
+                                        <div class="p-4 rounded-2xl bg-blue-500/10 text-brand-blue">
                                             <i class="fa-solid fa-chart-line text-xl"></i>
                                         </div>
                                         <div>
-                                            <h4 class="text-xl md:text-2xl font-black leading-tight">IT Data Analyst & Visualization</h4>
-                                            <p class="text-sm font-bold text-gray-800 dark:text-gray-300">PT. Bank Rakyat Indonesia (Persero) Tbk.</p>
+                                            <h4 class="text-xl md:text-2xl font-black leading-tight text-white">IT Data Analyst & Visualization</h4>
+                                            <p class="text-sm font-bold text-gray-400">PT. Bank Rakyat Indonesia (Persero) Tbk.</p>
                                         </div>
                                     </div>
-                                    <p class="mt-4 text-gray-500 dark:text-gray-400 font-light leading-relaxed">Analyzing complex financial data and building interactive dashboards to support corporate strategic decision-making.</p>
+                                    <p class="mt-4 text-gray-400 font-light leading-relaxed text-sm">Analyzing complex financial data and building interactive dashboards to support corporate strategic decision-making.</p>
                                 </div>
                             </div>
                         </div>
@@ -402,24 +420,23 @@
                         <!-- Job 2 -->
                         <div class="experience-card relative flex flex-col md:flex-row items-center group">
                             <div class="w-full md:w-1/2 pr-0 md:pr-12 order-2 md:order-1 pl-12 md:pl-0">
-                                <div class="p-8 rounded-[2rem] border border-white dark:border-gray-800 bg-white dark:bg-brand-card shadow-sm transition-all group-hover:shadow-2xl md:text-right">
+                                <div class="p-8 rounded-[2.5rem] bg-brand-cardDark shadow-sm border border-white/5 transition-all group-hover:shadow-2xl glass-card md:text-right">
                                     <div class="md:hidden mb-4">
                                         <p class="text-xs font-black text-gray-400 italic">2023</p>
                                     </div>
-                                    <!-- Role Icon Row (Reverse on desktop for alignment) -->
                                     <div class="flex items-center md:flex-row-reverse gap-4 mb-4">
-                                        <div class="p-4 rounded-2xl bg-purple-500/10 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400">
+                                        <div class="p-4 rounded-2xl bg-purple-500/10 text-purple-400">
                                             <i class="fa-solid fa-mobile-screen-button text-xl"></i>
                                         </div>
                                         <div>
-                                            <h4 class="text-xl md:text-2xl font-black leading-tight">IT Mobile Developer</h4>
-                                            <p class="text-sm font-bold text-gray-800 dark:text-gray-300">PT. Anggana Kurnia Putra</p>
+                                            <h4 class="text-xl md:text-2xl font-black leading-tight text-white">IT Mobile Developer</h4>
+                                            <p class="text-sm font-bold text-gray-400">PT. Anggana Kurnia Putra</p>
                                         </div>
                                     </div>
-                                    <p class="mt-4 text-gray-500 dark:text-gray-400 font-light leading-relaxed">Developing advanced navigation systems using Augmented Reality technology, focusing on real-time spatial mapping.</p>
+                                    <p class="mt-4 text-gray-400 font-light leading-relaxed text-sm md:text-right">Developing advanced navigation systems using Augmented Reality technology, focusing on real-time spatial mapping.</p>
                                 </div>
                             </div>
-                            <div class="timeline-dot absolute w-5 h-5 rounded-full bg-white border-4 border-gray-300 z-10 dark:bg-brand-dark dark:border-gray-700"></div>
+                            <div class="timeline-dot absolute left-[1px] md:left-1/2 w-5 h-5 rounded-full bg-[#020b18] border-4 border-gray-600 z-10"></div>
                             <div class="hidden md:flex w-1/2 pl-12 order-2">
                                 <div>
                                     <p class="text-sm font-black text-gray-400 mb-1 tracking-widest uppercase italic">2023</p>
@@ -432,59 +449,203 @@
             </div>
         </section>
 
-        <section id="contact" class="py-24 md:py-40 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-brand-card transition-colors duration-500">
-            <div class="max-w-6xl mx-auto px-6 text-center">
-                <h2 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 italic">Let's Connect</h2>
-                <p class="text-lg md:text-xl mb-16 max-w-2xl mx-auto font-light leading-relaxed text-gray-500 dark:text-gray-400">
-                    Open for collaboration or just a casual discussion about data and AI. Reach out to me through the channels below.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4 md:gap-6">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laurentius.bryan.h@gmail.com" target="_blank" class="flex items-center gap-3 bg-brand-blue text-white px-10 py-6 rounded-3xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all shadow-2xl hover:-translate-y-2 w-full sm:w-auto justify-center">
-                        <i class="fa-solid fa-envelope text-lg"></i>
-                        <span>Email Me</span>
-                    </a>
-                    <a href="https://wa.link/v5nsai" target="_blank" class="flex items-center gap-3 bg-brand-whatsapp text-white px-10 py-6 rounded-3xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all shadow-2xl hover:-translate-y-2 w-full sm:w-auto justify-center">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>Whatsapp Me</span>
-                    </a>
-                    <a href="https://linkedin.com/in/laurentius-bryan" target="_blank" class="flex items-center gap-3 border-2 border-gray-200 dark:border-gray-700 px-10 py-6 rounded-3xl font-black uppercase tracking-widest text-xs dark:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-all hover:-translate-y-2 w-full sm:w-auto justify-center">
-                        <i class="fa-brands fa-linkedin-in text-lg"></i>
-                        <span>LinkedIn</span>
-                    </a>
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 md:py-40 border-t border-white/5 bg-brand-dark/20 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                    <!-- Info Column -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <h2 class="text-5xl md:text-7xl font-black tracking-tighter italic text-white">Let's Connect</h2>
+                        <p class="text-base md:text-lg font-light leading-relaxed text-gray-400">
+                            Open for collaboration, contract discussions, or just a casual talk about software engineering and pipeline development. Drop a message!
+                        </p>
+                        
+                        <div class="flex flex-col gap-4">
+                            <!-- Direct Email Fallback -->
+                            <a href="mailto:laurentius.bryan.h@gmail.com" class="flex items-center gap-4 bg-white/5 hover:bg-white/10 text-white px-6 py-4 rounded-2xl font-semibold text-sm transition-all border border-white/10 glass-card">
+                                <i class="fa-solid fa-envelope text-lg text-brand-blue"></i>
+                                <span>laurentius.bryan.h@gmail.com</span>
+                            </a>
+                            <!-- WhatsApp Link -->
+                            <a href="https://wa.link/v5nsai" target="_blank" class="flex items-center gap-4 bg-brand-whatsapp/10 hover:bg-brand-whatsapp/20 text-white px-6 py-4 rounded-2xl font-semibold text-sm transition-all border border-brand-whatsapp/20 glass-card">
+                                <i class="fa-brands fa-whatsapp text-lg text-brand-whatsapp"></i>
+                                <span>Whatsapp Me</span>
+                            </a>
+                            <!-- LinkedIn Link -->
+                            <a href="https://linkedin.com/in/laurentius-bryan" target="_blank" class="flex items-center gap-4 bg-white/5 hover:bg-white/10 text-white px-6 py-4 rounded-2xl font-semibold text-sm transition-all border border-white/10 glass-card">
+                                <i class="fa-brands fa-linkedin-in text-lg text-brand-blue"></i>
+                                <span>LinkedIn Profile</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Form Column -->
+                    <div class="lg:col-span-7 bg-brand-cardDark glass-card p-8 md:p-10 rounded-[2.5rem]">
+                        <h3 class="text-2xl font-bold mb-6 text-white">Send a Message</h3>
+                        <form id="contact-form" class="space-y-6">
+                            <!-- Recommended Free submission handler: web3forms.com. Replace key below with your own Web3Forms key to receive emails instantly! -->
+                            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2" for="name">Your Name</label>
+                                    <input type="text" id="name" name="name" required placeholder="John Doe" class="w-full bg-white/5 border border-white/10 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue rounded-xl px-5 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2" for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" required placeholder="john@example.com" class="w-full bg-white/5 border border-white/10 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue rounded-xl px-5 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 text-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2" for="message">Message</label>
+                                <textarea id="message" name="message" required rows="5" placeholder="Tell me about your project context and goals..." class="w-full bg-white/5 border border-white/10 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue rounded-xl px-5 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 text-sm resize-none"></textarea>
+                            </div>
+                            <button type="submit" id="submit-btn" class="w-full bg-brand-blue hover:bg-blue-600 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3">
+                                <span>Send Message</span>
+                                <i class="fa-solid fa-paper-plane text-xs"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="py-12 text-center border-t border-gray-50 dark:border-gray-800 transition-colors duration-500">
-        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.4em]">
+    <!-- Functional Toast Notification element -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out max-w-sm w-full bg-[#030e21]/90 border border-white/10 backdrop-blur-md p-4 rounded-2xl shadow-2xl flex items-center gap-4">
+        <div id="toast-icon-bg" class="p-3 rounded-xl bg-blue-500/10 text-brand-blue">
+            <i id="toast-icon" class="fa-solid fa-circle-check text-xl"></i>
+        </div>
+        <div>
+            <h4 id="toast-title" class="text-sm font-bold text-white">Success!</h4>
+            <p id="toast-message" class="text-xs font-light text-gray-400">Your message has been sent successfully.</p>
+        </div>
+    </div>
+
+    <footer class="py-12 text-center border-t border-white/5 relative z-10 bg-brand-dark">
+        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.4em]">
             © <span id="year"></span> LAURENTIUS BRYAN HERMANTO • BANDUNG, INDONESIA
         </p>
     </footer>
 
     <script>
-        // Update Year
+        // Update Footer Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Dark Mode Logic
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-            const icon = document.getElementById('theme-icon');
-            if (document.documentElement.classList.contains('dark')) {
-                icon.className = 'fa-solid fa-sun text-yellow-400';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.className = 'fa-solid fa-moon text-gray-500';
-                localStorage.setItem('theme', 'light');
-            }
-        }
+        // High-performance smooth mouse glow tracking using lerp (Linear Interpolation)
+        const glow = document.getElementById('cursor-glow');
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let currentX = mouseX;
+        let currentY = mouseY;
 
-        // Persistent theme check
-        if (localStorage.getItem('theme') === 'dark' || 
-            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            const toggleIcon = document.getElementById('theme-icon');
-            if (toggleIcon) toggleIcon.className = 'fa-solid fa-sun text-yellow-400';
+        // Listen for mousemove to catch target coordinates
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Buttery smooth animation using requestAnimationFrame
+        function updateGlowPosition() {
+            // Apply fluid slide (lerp) toward mouse coordinates
+            currentX += (mouseX - currentX) * 0.08;
+            currentY += (mouseY - currentY) * 0.08;
+
+            glow.style.left = `${currentX}px`;
+            glow.style.top = `${currentY}px`;
+
+            requestAnimationFrame(updateGlowPosition);
+        }
+        
+        // Start tracking loop
+        updateGlowPosition();
+
+        // Contact Form Submission Handler
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const toast = document.getElementById('toast');
+        const toastIconBg = document.getElementById('toast-icon-bg');
+        const toastIcon = document.getElementById('toast-icon');
+        const toastTitle = document.getElementById('toast-title');
+        const toastMessage = document.getElementById('toast-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show sending state
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Sending...</span> <i class="fa-solid fa-circle-notch animate-spin"></i>`;
+
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            // Fetch to serverless API endpoint
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let result = await response.json();
+                if (response.status == 200) {
+                    // Success toast presentation
+                    showToast(
+                        'Message Sent!',
+                        'Your message has been processed successfully. I will get back to you shortly!',
+                        'success'
+                    );
+                    contactForm.reset();
+                } else {
+                    // Error response handling
+                    showToast(
+                        'Failed to Send',
+                        result.message || 'Submission failed. Please verify your Access Key.',
+                        'error'
+                    );
+                }
+            })
+            .catch(error => {
+                // Connection or offline error handling
+                showToast(
+                    'Network Error',
+                    'Unable to reach service. Please verify your connection status and try again.',
+                    'error'
+                );
+            })
+            .then(() => {
+                // Restore button visual state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            });
+        });
+
+        // Function to animate custom system toast messages
+        function showToast(title, message, type) {
+            // Configure toast icon color classes according to output response
+            if (type === 'success') {
+                toastIconBg.className = 'p-3 rounded-xl bg-green-500/10 text-green-400';
+                toastIcon.className = 'fa-solid fa-circle-check text-xl';
+            } else {
+                toastIconBg.className = 'p-3 rounded-xl bg-red-500/10 text-red-400';
+                toastIcon.className = 'fa-solid fa-circle-exclamation text-xl';
+            }
+            
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+
+            // Trigger enter slide animation
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            
+            // Auto hide timeline window after 5 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 5000);
         }
     </script>
 </body>
